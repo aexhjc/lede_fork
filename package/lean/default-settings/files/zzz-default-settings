@@ -5,7 +5,49 @@ uci commit luci
 
 uci set system.@system[0].timezone=CST-8
 uci set system.@system[0].zonename=Asia/Shanghai
+uci set system.@system[0].hostname=AexWRT
 uci commit system
+
+uci set network.lan.type='bridge'
+uci set network.lan.proto='static'
+uci set network.lan.ipaddr='192.168.80.1'
+uci set network.lan.netmask='255.255.255.0'
+#uci set network.lan.ip6assign='60'
+uci set network.lan.ifname='eth0 eth3 eth4 eth5'
+
+uci set network.1WAN=interface
+uci set network.1WAN.proto='dhcp'
+uci set network.1WAN.ifname='eth1'
+uci set network.1WAN.hostname='AexOP'
+uci set network.1WAN.metric='42'
+
+#uci set network.1WAN6=interface
+#uci set network.1WAN6.proto='dhcpv6'
+#uci set network.1WAN6.ifname='eth1'
+
+uci set network.2WAN=interface
+uci set network.2WAN.proto='pppoe'
+uci set network.2WAN.username='FSFTH1356192723@16900.gd'
+uci set network.2WAN.password='123456'
+uci set network.2WAN.ifname='eth2'
+uci set network.2WAN.ipv6='auto'
+uci set network.2WAN.metric='41'
+
+#uci set network.2WAN6=interface
+#uci set network.2WAN6.proto='dhcpv6'
+#uci set network.2WAN6.ifname='eth2'
+
+uci delete network.wan
+uci delete network.wan6
+uci commit network
+
+uci set firewall.@zone[1].input='ACCEPT'
+uci set firewall.@zone[1].network=''1WAN' '2WAN'' 
+uci commit firewall
+
+uci set dropbear.@dropbear[0].Port=29767
+uci commit dropbear
+
 
 uci set fstab.@global[0].anon_mount=1
 uci commit fstab
