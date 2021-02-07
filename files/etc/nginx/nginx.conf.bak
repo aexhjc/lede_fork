@@ -1,0 +1,91 @@
+user  root;
+worker_processes  4;
+worker_cpu_affinity 0001 0010 0100 1000;
+
+pid        /var/run/nginx.pid;
+events {
+    use epoll;
+    worker_connections 65535;
+    multi_accept on;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile on;
+    tcp_nopush on;
+    keepalive_timeout 60;
+    open_file_cache max=102400 inactive=20s;
+    open_file_cache_valid 30s;
+    open_file_cache_min_uses 1;
+    client_header_timeout 15;
+    client_body_timeout 15;
+    reset_timedout_connection on;
+    send_timeout 15;
+    server_tokens off;
+    client_max_body_size 10m;
+
+    client_body_buffer_size 4K;
+    client_header_buffer_size 1k;
+    large_client_header_buffers 2 1k;
+
+    gzip on;
+    gzip_http_version 1.1;
+    gzip_vary on;
+    gzip_comp_level 1;
+    gzip_proxied any;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript image/svg+xml;
+
+    root /www;
+#include upstream config files
+    include conf.d/*.pconf;
+#include config files in conf.d
+    include conf.d/*.conf;
+
+##Refuse strange hostname
+server{
+	access_log  /var/log/nginx/80500.log;
+	error_log   /var/log/nginx/80500.log;
+	listen 80 default;
+	listen [::]:80 default;
+	server_name _;
+	return 500;
+	}
+server {
+	access_log  /var/log/nginx/443500.log;
+	error_log   /var/log/nginx/443500.log;
+	listen 443 default;
+	listen [::]:443 default;
+	server_name  _;
+	ssl_certificate  /etc/config/key/macy.bid.cer;
+	ssl_certificate_key /etc/config/key/macy.bid.key;
+	return 500;
+    }
+
+server {
+	listen 80;
+	listen [::]:80;
+	server_name 192.168.80.1;
+	return 301 https://$host$request_uri;
+    }
+
+server {
+        listen 443;
+        listen [::]:443;
+        server_name  192.168.80.1 ;
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_prefer_server_ciphers on;
+        ssl_ciphers "EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH:DHE+AESGCM:DHE:!RSA!aNULL:!eNULL:!LOW:!RC4:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!CAMELLIA:!SEED";
+        ssl_session_tickets off;
+
+        ssl_certificate  /etc/config/key/macy.bid.cer;
+        ssl_certificate_key /etc/config/key/macy.bid.key;
+
+        location ~* .(jpg|jpeg|png|gif|ico|css|js)$ {
+            expires 365d;
+        }
+        include luci_uwsgi.conf;
+    }
+}
