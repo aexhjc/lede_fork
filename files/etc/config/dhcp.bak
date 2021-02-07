@@ -1,0 +1,169 @@
+
+config dnsmasq
+	option domainneeded '1'
+	option localise_queries '1'
+	option rebind_protection '1'
+	option rebind_localhost '1'
+	option local '/lan/'
+	option domain 'lan'
+	option expandhosts '1'
+	option authoritative '1'
+	option readethers '1'
+	option leasefile '/tmp/dhcp.leases'
+	option resolvfile '/tmp/resolv.conf.auto'
+	option nonwildcard '1'
+	option localservice '1'
+	option port '53'
+	option boguspriv '0'
+	option noresolv '0'
+	list server '127.0.0.1#5333'
+	option logfacility '/tmp/dnsmasq.log'
+
+config dhcp 'lan'
+	option interface 'lan'
+	option start '100'
+	option limit '150'
+	option leasetime '12h'
+	option dhcpv6 'server'
+	option ra 'server'
+	option ra_slaac '1'
+	list ra_flags 'managed-config'
+	list ra_flags 'other-config'
+
+config dhcp 'wan'
+	option interface 'wan'
+	option ignore '1'
+
+config odhcpd 'odhcpd'
+	option maindhcp '0'
+	option leasefile '/tmp/hosts/odhcpd'
+	option leasetrigger '/usr/sbin/odhcpd-update'
+	option loglevel '4'
+
+config host
+	option name 'AP_CF2'
+	option dns '1'
+	option mac '8C:AB:8E:AE:BA:31'
+	option ip '192.168.80.92'
+
+config host
+	option name 'CAM_C1'
+	option dns '1'
+	option mac '30:88:41:B8:4C:9A'
+	option ip '192.168.80.101'
+
+config host
+	option name 'CAM_C2'
+	option dns '1'
+	option mac '30:88:41:B8:4D:3F'
+	option ip '192.168.80.102'
+
+config host
+	option name 'CAM_C3'
+	option dns '1'
+	option mac '30:88:41:B8:46:1F'
+	option ip '192.168.80.103'
+
+config host
+	option name 'CAM_C4'
+	option dns '1'
+	option mac '44:b2:95:53:28:75'
+	option ip '192.168.80.104'
+
+config host
+	option name 'C_F6_K3'
+	option dns '1'
+	option mac '2c:b2:1a:5c:a0:08'
+	option ip '192.168.80.111'
+
+config host
+	option name 'C_F7_AP'
+	option dns '1'
+	option ip '192.168.80.112'
+	option mac '84:82:f4:22:94:74'
+
+config host
+	option name 'C_WKC'
+	option dns '1'
+	option mac '00:22:6d:2e:05:0e'
+	option ip '192.168.80.121'
+
+config host
+	option name 'C_MiTV_Wlan'
+	option dns '1'
+	option mac 'b0:41:1d:c0:ce:ad'
+	option ip '192.168.80.122'
+
+config host
+	option name 'C_MiTV_Lan'
+	option dns '1'
+	option mac 'e0:b6:55:92:69:0b'
+	option ip '192.168.80.123'
+
+config host
+	option name 'C_DSM_Lan1'
+	option dns '1'
+	option mac '00:11:32:4a:b8:b9'
+	option ip '192.168.80.131'
+
+config host
+	option name 'C_DSM_Lan2'
+	option dns '1'
+	option mac '00:11:32:dc:72:dd'
+	option ip '192.168.80.132'
+
+config host
+	option dns '1'
+	option name 'C_xiaomi-aircondition-ma2'
+	option ip '192.168.80.141'
+	option mac '40:31:3c:46:04:f9'
+
+config host
+	option dns '1'
+	option name 'C_viomi-waterheater'
+	option ip '192.168.80.142'
+	option mac '40:31:3c:e0:8c:be'
+
+config host
+	option dns '1'
+	option mac 'e0:b6:55:92:69:0b'
+	option name 'C_Media_QCA4002'
+	option ip '192.168.80.143'
+
+config host
+	option name 'CAM_K1'
+	option dns '1'
+	option mac '30:88:41:B8:46:0E'
+	option ip '192.168.80.201'
+
+config host
+	option name 'CAM_K2'
+	option dns '1'
+	option mac 'BC:1C:81:7C:35:89'
+	option ip '192.168.80.202'
+
+config host
+	option name 'CAM_K3'
+	option dns '1'
+	option mac '30:88:41:B8:4C:F9'
+	option ip '192.168.80.203'
+
+config host
+	option dns '1'
+	option mac '8c:ab:8e:ca:5a:c1'
+	option name 'AP_KF1'
+	option ip '192.168.80.91'
+
+config host
+	option mac '00:22:6D:2D:7D:AC'
+	option dns '1'
+	option name 'K_WKC'
+	option ip '192.168.80.221'
+
+config srvhost
+	option srv '_vlmcs._tcp'
+	option target 'AexWRT'
+	option port '1688'
+	option class '0'
+	option weight '100'
+

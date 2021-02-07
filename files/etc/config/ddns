@@ -1,0 +1,20 @@
+
+config ddns 'global'
+	option ddns_dateformat '%F %R'
+	option ddns_loglines '250'
+	option upd_privateip '0'
+
+config service 'macy'
+	option service_name 'cloudflare.com-v4'
+	option lookup_host 'home.macy.bid'
+	option use_ipv6 '1'
+	option domain 'home@macy.bid'
+	option username 'alexhjc@gmail.com'
+	option password 'fe4b43972de6114b86f10ebd12c32c4a776b0'
+	option interface '2WAN'
+	option use_syslog '0'
+	option use_logfile '0'
+	option enabled '1'
+	option ip_source 'interface'
+	option ip_interface 'pppoe-2WAN'
+

@@ -1,0 +1,30 @@
+
+config acme
+	option state_dir '/etc/config/key'
+	option account_email 'alexhjc@gmail.com'
+	option debug '0'
+
+config cert 'example_wildcard'
+	option use_staging '1'
+	option keylength '2048'
+	option update_uhttpd '1'
+	option update_nginx '1'
+	option calias 'example.com'
+	option dalias 'dalias.example.com'
+	option dns 'dns_cf'
+	list credentials 'CF_Email="alexhjc@gmail.com"'
+	list credentials 'CF_Key="fe4b43972de6114b86f10ebd12c32c4a776b0"'
+	list domains 'macy.bid'
+	list domains '*.macy.bid'
+	list domains 'home.macy.bid'
+	option enabled '0'
+
+config cert 'example'
+	option enabled '0'
+	option use_staging '1'
+	option keylength '2048'
+	option update_uhttpd '1'
+	option update_nginx '1'
+	list domains 'example.org'
+	list domains 'sub.example.org'
+
