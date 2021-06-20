@@ -25,3 +25,6 @@ git-src
 .git-credentials
 .config.old
 /*.log
+.project
+.cproject
+.ccache
