@@ -222,10 +222,10 @@ CONFIG_GRUB_BOOTOPTS=""
 CONFIG_GRUB_TIMEOUT="0"
 CONFIG_GRUB_TITLE="OpenWrt"
 # CONFIG_ISO_IMAGES is not set
-# CONFIG_QCOW2_IMAGES is not set
+CONFIG_QCOW2_IMAGES=y
 # CONFIG_VDI_IMAGES is not set
 # CONFIG_VHDX_IMAGES is not set
-CONFIG_VMDK_IMAGES=y
+# CONFIG_VMDK_IMAGES is not set
 CONFIG_TARGET_IMAGES_GZIP=y
 
 #
@@ -2906,7 +2906,7 @@ CONFIG_PACKAGE_kmod-md-raid1=y
 CONFIG_PACKAGE_kmod-md-raid10=y
 CONFIG_PACKAGE_kmod-md-raid456=y
 # CONFIG_PACKAGE_kmod-mvsas is not set
-# CONFIG_PACKAGE_kmod-nbd is not set
+CONFIG_PACKAGE_kmod-nbd=y
 # CONFIG_PACKAGE_kmod-scsi-cdrom is not set
 CONFIG_PACKAGE_kmod-scsi-core=y
 # CONFIG_PACKAGE_kmod-scsi-generic is not set
@@ -5139,7 +5139,7 @@ CONFIG_PACKAGE_libf2fs=y
 # CONFIG_PACKAGE_libfaad2 is not set
 # CONFIG_PACKAGE_libfastjson is not set
 CONFIG_PACKAGE_libfdisk=y
-# CONFIG_PACKAGE_libfdt is not set
+CONFIG_PACKAGE_libfdt=y
 CONFIG_PACKAGE_libffi=y
 # CONFIG_PACKAGE_libffmpeg-audio-dec is not set
 # CONFIG_PACKAGE_libffmpeg-custom is not set
@@ -5189,7 +5189,7 @@ CONFIG_PACKAGE_libintl-full=y
 # CONFIG_PACKAGE_libipfs-http-client is not set
 # CONFIG_PACKAGE_libiw is not set
 CONFIG_PACKAGE_libiwinfo=y
-# CONFIG_PACKAGE_libjpeg-turbo is not set
+CONFIG_PACKAGE_libjpeg-turbo=y
 CONFIG_PACKAGE_libjson-c=y
 CONFIG_PACKAGE_libkeyutils=y
 # CONFIG_PACKAGE_libkmod is not set
@@ -5293,7 +5293,7 @@ CONFIG_PACKAGE_libpcre2-16=y
 # CONFIG_PACKAGE_libpfring is not set
 # CONFIG_PACKAGE_libpkcs11-spy is not set
 # CONFIG_PACKAGE_libpkgconf is not set
-# CONFIG_PACKAGE_libpng is not set
+CONFIG_PACKAGE_libpng=y
 CONFIG_PACKAGE_libpopt=y
 # CONFIG_PACKAGE_libpri is not set
 # CONFIG_PACKAGE_libprotobuf-c is not set
@@ -5312,7 +5312,7 @@ CONFIG_PACKAGE_librrd1=y
 # CONFIG_PACKAGE_libruby is not set
 # CONFIG_PACKAGE_libsamplerate is not set
 # CONFIG_PACKAGE_libsane is not set
-# CONFIG_PACKAGE_libsasl2 is not set
+CONFIG_PACKAGE_libsasl2=y
 # CONFIG_PACKAGE_libsearpc is not set
 CONFIG_PACKAGE_libseccomp=y
 # CONFIG_PACKAGE_libselinux is not set
@@ -5361,7 +5361,7 @@ CONFIG_LIBSODIUM_MINIMAL=y
 # CONFIG_PACKAGE_libsoxr is not set
 # CONFIG_PACKAGE_libspeex is not set
 # CONFIG_PACKAGE_libspeexdsp is not set
-# CONFIG_PACKAGE_libspice-server is not set
+CONFIG_PACKAGE_libspice-server=y
 CONFIG_PACKAGE_libss=y
 # CONFIG_PACKAGE_libssh is not set
 # CONFIG_PACKAGE_libssh2 is not set
@@ -5438,7 +5438,7 @@ CONFIG_PACKAGE_musl-fts=y
 # CONFIG_PACKAGE_open-isns is not set
 # CONFIG_PACKAGE_openpgm is not set
 # CONFIG_PACKAGE_p11-kit is not set
-# CONFIG_PACKAGE_pixman is not set
+CONFIG_PACKAGE_pixman=y
 # CONFIG_PACKAGE_poco is not set
 # CONFIG_PACKAGE_poco-all is not set
 # CONFIG_PACKAGE_protobuf is not set
@@ -7480,17 +7480,22 @@ CONFIG_PACKAGE_ttyd=y
 # Virtualization
 #
 # CONFIG_PACKAGE_qemu-arm-softmmu is not set
-# CONFIG_PACKAGE_qemu-bridge-helper is not set
-# CONFIG_PACKAGE_qemu-firmware-efi is not set
-# CONFIG_PACKAGE_qemu-firmware-pxe is not set
-# CONFIG_PACKAGE_qemu-firmware-seabios is not set
-# CONFIG_PACKAGE_qemu-firmware-seavgabios is not set
-# CONFIG_PACKAGE_qemu-ga is not set
-# CONFIG_PACKAGE_qemu-img is not set
-# CONFIG_PACKAGE_qemu-keymaps is not set
-# CONFIG_PACKAGE_qemu-nbd is not set
-# CONFIG_PACKAGE_qemu-x86_64-softmmu is not set
-# CONFIG_PACKAGE_virtio-console-helper is not set
+CONFIG_PACKAGE_qemu-bridge-helper=y
+CONFIG_PACKAGE_qemu-firmware-efi=y
+CONFIG_PACKAGE_qemu-firmware-pxe=y
+CONFIG_PACKAGE_qemu-firmware-seabios=y
+CONFIG_PACKAGE_qemu-firmware-seavgabios=y
+CONFIG_PACKAGE_qemu-ga=y
+CONFIG_PACKAGE_qemu-img=y
+CONFIG_PACKAGE_qemu-keymaps=y
+CONFIG_PACKAGE_qemu-nbd=y
+CONFIG_PACKAGE_qemu-x86_64-softmmu=y
+CONFIG_QEMU_UI_VNC=y
+CONFIG_QEMU_UI_VNC_JPEG=y
+CONFIG_QEMU_UI_VNC_PNG=y
+CONFIG_QEMU_UI_VNC_SASL=y
+CONFIG_QEMU_UI_SPICE=y
+CONFIG_PACKAGE_virtio-console-helper=y
 # end of Virtualization
 
 #
