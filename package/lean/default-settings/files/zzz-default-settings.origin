@@ -5,76 +5,7 @@ uci commit luci
 
 uci set system.@system[0].timezone=CST-8
 uci set system.@system[0].zonename=Asia/Shanghai
-##配置系统名
-uci set system.@system[0].hostname=AexWRT
 uci commit system
-###配置lan接口
-uci set network.lan.type='bridge'
-uci set network.lan.proto='static'
-uci set network.lan.ipaddr='192.168.80.1'
-uci set network.lan.netmask='255.255.255.0'
-uci set network.lan.ip6assign='64'
-uci set network.lan.ifname='eth0 eth3 eth4 eth5'
-###配置wanc接口
-uci set network.wanc=interface
-uci set network.wanc.proto='dhcp'
-uci set network.wanc.ifname='eth1'
-uci set network.wanc.hostname='AexOP'
-uci set network.wanc.metric='41'
-###配置wank接口
-uci set network.wank=interface
-uci set network.wank.proto='pppoe'
-uci set network.wank.username='FS1435571042@16900.gd'
-uci set network.wank.password='123456'
-uci set network.wank.ifname='eth2'
-uci set network.wank.ipv6='auto'
-uci set network.wank.metric='42'
-###配置zero接口
-uci set network.zero=interface
-uci set network.zero.proto='none'
-uci set network.zero.ifname='ztc25dp6kw'
-uci set network.wanc.metric='43'
-###删除默认wan接口
-uci delete network.wan
-uci delete network.wan6
-###删除默认ipv6分配地址
-uci set network.globals.ula_prefix=''
-uci commit network
-##防火墙默认规则
-uci set firewall.@defaults[0].forward='ACCEPT'
-uci set firewall.@defaults[0].input='ACCEPT'
-uci set firewall.@defaults[0].output='ACCEPT'
-##配置防火墙wan区域
-uci set firewall.@zone[1].input='ACCEPT'
-uci set firewall.@zone[1].forward='ACCEPT'
-uci set firewall.@zone[1].output='ACCEPT'
-uci set firewall.@zone[1].network=''wanc' 'wank'' 
-##配置防火墙zero区域
-uci add firewall zone
-uci set firewall.@zone[2].name='zero'
-uci set firewall.@zone[2].input='ACCEPT'
-uci set firewall.@zone[2].forward='ACCEPT'
-uci set firewall.@zone[2].output='ACCEPT'
-uci set firewall.@zone[2].network='zero' 
-##防火墙转发规则
-uci add firewall forwarding
-uci set firewall.@forwarding[1].src='wan'
-uci set firewall.@forwarding[1].dest='lan'
-
-uci add firewall forwarding
-uci set firewall.@forwarding[2].src='zero'
-uci set firewall.@forwarding[2].dest='lan'
-
-uci add firewall forwarding
-uci set firewall.@forwarding[3].src='lan'
-uci set firewall.@forwarding[3].dest='zero'
-
-uci commit firewall
-##配置dropbear
-uci set dropbear.@dropbear[0].Port=29767
-uci set dropbear.@dropbear[0].Interface=''
-uci set dropbear.@dropbear[0].GatewayPorts='on'
-uci commit dropbear
 
 uci set fstab.@global[0].anon_mount=1
 uci commit fstab
@@ -99,7 +30,6 @@ sed -i 's/services/nas/g'  /usr/lib/lua/luci/view/minidlna_status.htm
 ln -sf /sbin/ip /usr/bin/ip
 
 sed -i 's#downloads.openwrt.org#mirrors.cloud.tencent.com/lede#g' /etc/opkg/distfeeds.conf
-##配置root密码
 sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' /etc/shadow
 
 sed -i "s/# //g" /etc/opkg/distfeeds.conf
